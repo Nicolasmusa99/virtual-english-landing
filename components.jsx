@@ -611,9 +611,46 @@ function Teachers() {
               <div className="teacher-cta-card">
                 <h4>Email</h4>
                 <p>For longer messages and portfolios.</p>
-                <a href="mailto:virtualito.english@gmail.com" className="btn-outline">
+                <button
+                  className="btn-outline"
+                  type="button"
+                  onClick={() => {
+                    const email = 'virtualito.english@gmail.com';
+                    const subject = encodeURIComponent('Inquiry about Virtual English');
+                    const body = encodeURIComponent("Hello,\n\nI'm a teacher interested in Virtual English.\n\n");
+
+                    // Always copy email to clipboard first as universal fallback
+                    if (navigator.clipboard) {
+                      navigator.clipboard.writeText(email).catch(() => {});
+                    }
+
+                    // Try mailto: first (for users with a mail client configured)
+                    const mailtoLink = 'mailto:' + email + '?subject=' + subject + '&body=' + body;
+
+                    // Detect if mailto opens anything: use a hidden iframe approach
+                    const start = Date.now();
+                    const wasVisible = document.visibilityState;
+
+                    // Open mailto in current tab (browser will only navigate if handler exists)
+                    window.location.href = mailtoLink;
+
+                    // If after 800ms nothing happened (no mail client), open Gmail web as fallback
+                    setTimeout(() => {
+                      if (document.visibilityState === wasVisible && Date.now() - start < 1500) {
+                        // No mail client opened — fallback to Gmail web compose
+                        window.open(
+                          'https://mail.google.com/mail/?view=cm&fs=1&to=' + email + '&su=' + subject + '&body=' + body,
+                          '_blank',
+                          'noopener,noreferrer'
+                        );
+                      }
+                    }, 800);
+                  }}
+                  title="Abre tu cliente de email o Gmail en el navegador. El email se copia al portapapeles."
+                  style={{ cursor: 'pointer' }}
+                >
                   <Icon.Mail size={16}/> Send email
-                </a>
+                </button>
               </div>
             </div>
             <div className="dark-accent-row">
