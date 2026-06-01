@@ -57,7 +57,21 @@ function Hero() {
       <div className="container">
         <div className="hero-grid">
           <div className="hero-left">
-            <Reveal delay={0}><div className="eyebrow">Clases en vivo · 100% online</div></Reveal>
+            <Reveal delay={0}>
+              <img
+                src="logo.jpg"
+                alt="Virtual English"
+                style={{
+                  width: 72,
+                  height: 72,
+                  borderRadius: 8,
+                  display: 'block',
+                  marginBottom: 20,
+                  boxShadow: '0 4px 16px rgba(31,53,86,0.12)'
+                }}
+              />
+            </Reveal>
+            <Reveal delay={60}><div className="eyebrow">Clases en vivo · 100% online</div></Reveal>
             <Reveal delay={100}>
               <h1 className="h-display">Dejá de traducir.<br/>Pensá en inglés.</h1>
             </Reveal>
@@ -671,7 +685,7 @@ function Footer() {
       <div className="footer-grid">
         <div>
           <div className="footer-logo">Virtual <b>English</b></div>
-          <p style={{ color: '#B6C6D8', fontSize: 14, fontStyle: 'italic', maxWidth: 360 }}>Un profesor. Un instituto.</p>
+          <p style={{ color: '#B6C6D8', fontSize: 14, fontStyle: 'italic', maxWidth: 360 }}>One teacher. One institute.</p>
           <p style={{ color: '#6F8AA3', fontSize: 13, marginTop: 18 }}>© 1996 – {new Date().getFullYear()} Virtual English. Sistema autoral.</p>
         </div>
         <div>
